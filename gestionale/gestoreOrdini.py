@@ -53,8 +53,11 @@ class GestoreOrdini:
         return Ordine([RigaOrdine(prod, quantitaP)], cliente)
 
     def _update_DB(self, prod, cliente):
-        pass
-    #DA FINIRE DI COPIARE METODO
+        if not self._dao.hasProdotto(prod):
+            self._dao.addProdotto(prod)
+
+        if not self._dao.hasCliente(cliente):
+            self._dao.addCliente(cliente)
 
     def processa_prossimo_ordine(self):
         """Questo metodo legge il prossimo ordine in coda e lo gestisce"""
